@@ -1,28 +1,43 @@
-📌 User & Todo Management API (Node.js + Express + MongoDB)
+# 📌 User & Todo Management API (Node.js + Express + MongoDB)
 
-A fully functional RESTful API built with Node.js, Express.js, MongoDB, and JWT authentication.
-The system allows users to register, log in, view profile, and manage their todo tasks (create, list, update, delete).
-This project follows MVC architecture, includes error handling, rate limiting, and supports pagination.
+A complete RESTful API for **User Authentication** and **Todo Management**, built using:
 
-🚀 Tech Stack
+* Node.js
+* Express.js
+* MongoDB + Mongoose
+* JWT Authentication
+* bcryptjs
+* MVC Architecture
 
-Node.js
+---
 
-Express.js
+# 🚀 Features
 
-MongoDB + Mongoose
+### 👤 User Module
 
-JWT Authentication
+* Register
+* Login
+* Get Profile
 
-bcryptjs (password hashing)
+### 📝 Todo Module
 
-dotenv (environment variables)
+* Create Todo
+* Get Todos (with pagination)
+* Update Todo status
+* Delete Todo
 
-express-rate-limit (for auth route protection)
+### 🔒 Security Features
 
-nodemon (development server)
+* JWT Auth
+* Password hashing
+* Rate limiting
+* Error handling middleware
 
-📂 Project Structure
+---
+
+# 📁 Project Structure
+
+```bash
 src/
 │── config/
 │     └── db.js
@@ -44,165 +59,198 @@ src/
 │── utils/
 │     └── generateToken.js
 └── server.js
+```
 
-🛠️ Setup Instructions
-1️⃣ Clone the Repository
+---
+
+# 🛠️ Setup & Installation
+
+## 1️⃣ Clone the Repository
+
+```bash
 git clone https://github.com/<your-username>/<repo-name>.git
 cd <repo-name>
+```
 
-2️⃣ Install Dependencies
+---
+
+## 2️⃣ Install Dependencies
+
+```bash
 npm install
+```
 
-3️⃣ Create a .env File
+---
 
-Create a .env file in the project root:
+## 3️⃣ Create `.env` File
 
+```bash
 PORT=5000
-MONGO_URI=mongodb://127.0.0.1:27017/user_todo_db   # or your MongoDB Atlas URI
-JWT_SECRET=your_secret_key
+MONGO_URI=mongodb://127.0.0.1:27017/user_todo_db
+JWT_SECRET=your_secret_key_here
 JWT_EXPIRES_IN=7d
+```
 
-4️⃣ Start the Server
+---
+
+## 4️⃣ Start the Server
+
+```bash
 npm run dev
+```
 
+Server starts at:
 
-Server will run at:
-
+```bash
 http://localhost:5000
+```
 
-🔑 Authentication
+---
 
-This API uses JWT authentication.
+# 🔑 Authentication Header
 
-After registering or logging in, you will receive:
+```bash
+Authorization: Bearer <your_token>
+```
 
-{
-  "token": "your_jwt_token"
-}
+---
 
+# 📚 API Endpoints
 
-Use it in all protected routes:
+---
 
-Authorization: Bearer <your_jwt_token>
+# 🔐 Auth Routes
 
-📚 API Endpoints
-🔐 Auth Routes
-✅ 1. Register User
+## 1. Register User
 
+```bash
 POST /api/auth/register
+```
 
-Request Body
+### Request Body
+
+```json
 {
   "name": "Manas",
   "email": "manas@example.com",
   "password": "123456"
 }
+```
 
-Response
-{
-  "token": "JWT_TOKEN_HERE",
-  "user": {
-    "id": "...",
-    "name": "Manas",
-    "email": "manas@example.com"
-  }
-}
+---
 
-✅ 2. Login User
+## 2. Login User
 
+```bash
 POST /api/auth/login
+```
 
-Request Body
+### Request Body
+
+```json
 {
   "email": "manas@example.com",
   "password": "123456"
 }
+```
 
-Response
-{
-  "token": "JWT_TOKEN_HERE",
-  "user": {
-    "id": "...",
-    "name": "Manas",
-    "email": "manas@example.com"
-  }
-}
+---
 
-👤 User Routes
-✅ 3. Get User Profile
+# 👤 User Routes
 
+## Get Profile (Protected)
+
+```bash
 GET /api/user/profile
-Protected Route
+```
 
-Headers
+Header:
+
+```bash
 Authorization: Bearer <token>
+```
 
-Response
-{
-  "name": "Manas",
-  "email": "manas@example.com"
-}
+---
 
-📝 Todo Routes
+# 📝 Todo Routes
 
-(ALL routes below require JWT token)
+## Create Todo
 
-✅ 4. Create Todo
-
+```bash
 POST /api/todos
+```
 
-Headers
-Authorization: Bearer <token>
+### Body:
 
-Body
+```json
 {
   "title": "Build API",
   "description": "Finish assignment"
 }
+```
 
-✅ 5. Get All Todos (Paginated)
+---
 
+## Get All Todos
+
+```bash
 GET /api/todos?page=1&limit=10
+```
 
-Headers
-Authorization: Bearer <token>
+---
 
-Response
-{
-  "total": 1,
-  "page": 1,
-  "limit": 10,
-  "totalPages": 1,
-  "data": [ ...todos ]
-}
+## Update Todo Status
 
-✅ 6. Update Todo Status
-
+```bash
 PATCH /api/todos/:id
+```
 
-Body
+### Body:
+
+```json
 {
   "status": "completed"
 }
+```
 
-✅ 7. Delete Todo
+---
 
+## Delete Todo
+
+```bash
 DELETE /api/todos/:id
+```
 
-Response
-{
-  "message": "Todo deleted successfully"
-}
+---
 
-🧩 Bonus Features
+# 📄 Postman / Thunder Client Collection
 
-✔ MVC Folder Structure
-✔ Error Handling Middleware
-✔ Rate Limiting for Auth Routes
-✔ Pagination on GET /todos
-✔ dotenv for configuration
-✔ JWT Authentication
-✔ Clean and modular code
+Included in repo:
 
+```bash
+postman/UserTodoAPI.postman_collection.json
+```
 
-GitHub: https://github.com/your-username
+Import this into Postman to test APIs.
+
+---
+
+# 🖼 Screenshots
+
+Screenshots of Postman responses (Register, Login, Profile, Todo CRUD) are **shared via email**, as requested.
+
+---
+
+# 🧩 Bonus Features Implemented
+
+```bash
+✓ JWT Authentication
+✓ Password Hashing
+✓ Rate Limiting
+✓ Pagination
+✓ Error Handling Middleware
+✓ MVC Architecture
+```
+
+---
+
